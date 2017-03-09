@@ -27,10 +27,10 @@ yum update -y
 yum install -y git cmake gcc-c++ gcc python-devel chrpath
 
 cd /tmp
-wget https://github.com/aeddi/aws-lambda-python-opencv/archive/master.zip
-unzip master.zip
-chmod 777 aws-lambda-python-opencv-master
-cd aws-lambda-python-opencv-master
+wget https://github.com/rlustig-gpfw/aws-lambda-python-opencv/archive/v1.0.zip
+unzip v1.0.zip
+chmod 777 aws-lambda-python-opencv-master-1.0
+cd aws-lambda-python-opencv-master-1.0
 su -c './build.sh' ec2-user
 
 aws s3 cp lambda-package.zip s3://<my-target-bucket>
