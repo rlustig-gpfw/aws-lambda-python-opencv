@@ -13,22 +13,34 @@ cp -rf build/numpy/lib64/python2.7/site-packages/numpy lambda-package
 (
 	NUMPY=$PWD/lambda-package/numpy/core/include
 	cd build
-	git clone https://github.com/Itseez/opencv.git
+	git clone https://github.com/opencv/opencv_contrib.git
+	cd opencv_contrib
+	git checkout 3.2.0
+	cd ..
+	git clone https://github.com/opencv/opencv.git
 	cd opencv
-	git checkout 3.1.0
-	cmake										\
-		-D CMAKE_BUILD_TYPE=RELEASE				\
-		-D WITH_TBB=ON							\
-		-D WITH_IPP=ON							\
-		-D WITH_V4L=ON							\
-		-D ENABLE_AVX=ON						\
-		-D ENABLE_SSSE3=ON						\
-		-D ENABLE_SSE41=ON						\
-		-D ENABLE_SSE42=ON						\
-		-D ENABLE_POPCNT=ON						\
-		-D ENABLE_FAST_MATH=ON					\
-		-D BUILD_EXAMPLES=OFF					\
-		-D PYTHON2_NUMPY_INCLUDE_DIRS="$NUMPY"	\
+	git checkout 3.2.0	
+	cmake										               \
+		-D CMAKE_BUILD_TYPE=RELEASE				               \
+		-D OPENCV_EXTRA_MODULES_PATH=../opencv_contrib/modules \
+		-D BUILD_opencv_aruco=OFF                              \
+		-D BUILD_opencv_bioinspired=OFF                        \
+		-D BUILD_opencv_cnn_3dobj=OFF                          \
+		-D BUILD_opencv_dnn=OFF                                \
+		-D BUILD_hdf=OFF                                       \
+		-D BUILD_plot=OFF                                      \
+		-D BUILD_rgbd=OFF                                      \
+		-D WITH_TBB=ON							               \
+		-D WITH_IPP=ON							               \
+		-D WITH_V4L=ON							               \
+		-D ENABLE_AVX=ON						               \
+		-D ENABLE_SSSE3=ON						               \
+		-D ENABLE_SSE41=ON						               \
+		-D ENABLE_SSE42=ON						               \
+		-D ENABLE_POPCNT=ON						               \
+		-D ENABLE_FAST_MATH=ON					               \
+		-D BUILD_EXAMPLES=OFF					               \
+		-D PYTHON2_NUMPY_INCLUDE_DIRS="$NUMPY"	               \
 		.
 	make
 )
